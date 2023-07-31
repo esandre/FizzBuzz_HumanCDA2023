@@ -20,9 +20,14 @@ public class FizzBuzzTest
             var ligne = lignes[i];
             var nombreAttendu = i + 1U;
             var estDivisibleParTrois = nombreAttendu % 3 == 0;
+            var estDivisibleParCinq = nombreAttendu % 5 == 0;
 
-            if(estDivisibleParTrois) 
+            if (estDivisibleParTrois && estDivisibleParCinq)
+                Assert.Equal("FizzBuzz", ligne);
+            else if(estDivisibleParTrois) 
                 Assert.Equal("Fizz", ligne);
+            else if (estDivisibleParCinq)
+                Assert.Equal("Buzz", ligne);
             else
             {
                 var nombre = uint.Parse(ligne);
@@ -35,7 +40,7 @@ public class FizzBuzzTest
     public void AfficherListeNombreNegatifs()
     {
         // ETANT DONNE une limite négative
-        const int limite = -5;
+        const int limite = -20;
 
         // QUAND on appelle ListeNombres.Afficher avec une limite <limite> négative
         var sortie = ListeNombres.Afficher(limite);
@@ -50,9 +55,14 @@ public class FizzBuzzTest
             var ligne = lignes[i];
             var nombreAttendu = -(i + 1U);
             var estDivisibleParTrois = nombreAttendu % 3 == 0;
+            var estDivisibleParCinq = nombreAttendu % 5 == 0;
 
-            if (estDivisibleParTrois)
+            if (estDivisibleParTrois && estDivisibleParCinq)
+                Assert.Equal("BuzzFizz", ligne);
+            else if (estDivisibleParTrois)
                 Assert.Equal("Fizz", ligne);
+            else if (estDivisibleParCinq)
+                Assert.Equal("Buzz", ligne);
             else
             {
                 var nombre = int.Parse(ligne);
