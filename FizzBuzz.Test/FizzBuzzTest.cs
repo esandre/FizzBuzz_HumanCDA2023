@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace FizzBuzz.Test;
 
 public class FizzBuzzTest
@@ -15,9 +13,22 @@ public class FizzBuzzTest
         // ALORS la liste des <limite> premiers nombres entiers positifs s'affiche, chacun sur une ligne
         var lignes = sortie.Split(Environment.NewLine);
 
-        Assert.Equal((int) limite, lignes.Length);
-        var nombres = lignes.Select(uint.Parse).ToArray();
-        for (var i = 0U; i < limite; i++) Assert.Equal(i + 1U, nombres[i]);
+        Assert.Equal(limite, lignes.Length);
+
+        for (var i = 0; i < lignes.Length; i++)
+        {
+            var ligne = lignes[i];
+            var nombreAttendu = i + 1U;
+            var estDivisibleParTrois = nombreAttendu % 3 == 0;
+
+            if(estDivisibleParTrois) 
+                Assert.Equal("Fizz", ligne);
+            else
+            {
+                var nombre = uint.Parse(ligne);
+                Assert.Equal(nombreAttendu, nombre);
+            }
+        }
     }
 
     [Fact]
@@ -33,7 +44,32 @@ public class FizzBuzzTest
         var lignes = sortie.Split(Environment.NewLine);
 
         Assert.Equal(Math.Abs(limite), lignes.Length);
-        var nombres = lignes.Select(int.Parse).ToArray();
-        for (var i = 0U; i < Math.Abs(limite); i++) Assert.Equal(-(i + 1U), nombres[i]);
+
+        for (var i = 0; i < lignes.Length; i++)
+        {
+            var ligne = lignes[i];
+            var nombreAttendu = -(i + 1U);
+            var estDivisibleParTrois = nombreAttendu % 3 == 0;
+
+            if (estDivisibleParTrois)
+                Assert.Equal("Fizz", ligne);
+            else
+            {
+                var nombre = int.Parse(ligne);
+                Assert.Equal(nombreAttendu, nombre);
+            }
+        }
+    }
+
+    [Fact]
+    public void Trois_Est_Fizz()
+    {
+        // QUAND on appelle ListeNombres.Afficher avec une limite d'au-moins 3
+        var sortie = ListeNombres.Afficher(3);
+
+        // ALORS trois est remplacé par Fizz
+        var lignes = sortie.Split(Environment.NewLine);
+
+        Assert.Equal("Fizz", lignes.Last());
     }
 }
