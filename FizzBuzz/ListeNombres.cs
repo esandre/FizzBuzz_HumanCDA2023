@@ -10,7 +10,7 @@ public static class ListeNombres
 
     private static IEnumerable<int> NegativeRange(int start, int limite)
     {
-        return Enumerable.Range(Math.Abs(start), Math.Abs(limite))
-            .Select(nombre => -nombre);
+        for (var i = start; i >= limite; i--)
+            yield return i;
     }
 }
