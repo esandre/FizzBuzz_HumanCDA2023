@@ -2,20 +2,19 @@ namespace FizzBuzz.Test;
 
 public class FizzBuzzTest
 {
-    [Fact]
-    public void AfficherListeNombres()
+    [Theory]
+    [InlineData(20U)]
+    [InlineData(10U)]
+    public void AfficherListeNombres(uint limite)
     {
-        // QUAND on appelle ListeNombres.Afficher
-        var sortie = ListeNombres.Afficher();
+        // QUAND on appelle ListeNombres.Afficher avec une limite <limite>
+        var sortie = ListeNombres.Afficher(limite);
 
-        // ALORS la liste des 20 premiers nombres entiers positifs s'affiche, chacun sur une ligne
+        // ALORS la liste des <limite> premiers nombres entiers positifs s'affiche, chacun sur une ligne
         var lignes = sortie.Split(Environment.NewLine);
 
-        Assert.Equal(20, lignes.Length);
+        Assert.Equal((int) limite, lignes.Length);
         var nombres = lignes.Select(uint.Parse).ToArray();
-        for (var i = 0U; i < 20; i++)
-        {
-            Assert.Equal(i + 1U, nombres[i]);
-        }
+        for (var i = 0U; i < limite; i++) Assert.Equal(i + 1U, nombres[i]);
     }
 }
